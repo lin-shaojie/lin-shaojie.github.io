@@ -8,6 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -21,13 +22,13 @@ jobs:
         with:
           node-version: 16
           cache: npm
-      # - run: npm ci
+      - run: npm ci
       - name: Build
         run: npm run docs:build
       - uses: actions/configure-pages@v2
       - uses: actions/upload-pages-artifact@v1
         with:
-          path: .vitepress/dist
+          path: docs/.vitepress/dist
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v1
